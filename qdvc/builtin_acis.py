@@ -10,8 +10,9 @@ Systems* and kindred IS outlets) differs from APA in several visible ways:
     following comma placed *inside* the closing quote.
   * The author list joins the final author with ", and" and keeps every author
     in "Surname, Initials" order (it is never inverted back to initials-first).
-  * Journal articles show volume and issue as ``(vol:iss)`` and, where present,
-    a DOI as ``(doi:…)`` in place of a page range.
+  * Journal articles show volume and issue as ``(vol:iss)``, then the page
+    range, then a DOI as ``(doi:…)`` where present. A DOI does not displace
+    the pages; it follows them, and stands alone when no pages are recorded.
 
 Like :mod:`builtin_apa7`, this is a pragmatic formatter (not a full CSL engine)
 that produces two forms:
@@ -154,10 +155,13 @@ def _render_article(e: dict, disambiguator: str) -> str:
             if issue:
                 vi += f":{escape(issue)}"
             tail += f" ({vi})"
-        if doi:
+        if pages:
+            tail += f", pp. {escape(pages)}"
+            if doi:
+                tail += f" (doi:{escape(doi)})"
+            tail += "."
+        elif doi:
             tail += f" (doi:{escape(doi)})"
-        elif pages:
-            tail += f", pp. {escape(pages)}."
         else:
             tail += "."
     if tail:

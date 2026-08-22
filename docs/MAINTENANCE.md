@@ -534,7 +534,7 @@ authors with no parentheses and a trailing period; article/chapter titles are
 curly-quoted with the following comma *inside* the closing quote; every author
 stays surname-first (via `builtin.surname_initials`) and the final author is
 joined with ", and"; journal volume/issue render as `(vol:iss)`; a DOI renders
-as `(doi:…)` in place of a page range; and `@online` uses an
+as `(doi:…)` after any page range; and `@online` uses an
 `(url, accessed <D Month YYYY>)` tail.
 
 - `format_acis_markup(entry, disambiguator="")` / `format_acis_plain(...)`
